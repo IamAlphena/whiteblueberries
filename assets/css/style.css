@@ -1,3 +1,45 @@
-#Blueberries{
-    background-color: blue;
+/****
+Color Palette 
+Deep Blue: #28527A
+Light Blue: #8aC4D0
+Goldenrod: #F4D160
+Pale Yellow: #FBEEAC
+Off White: #FBFBF8
+****/
+
+/****
+Base Attributes
+****/
+body{   background: #F4D160; /* Old browsers */
+    background: -moz-linear-gradient(top,  #f4d160 0%, #28527A 100%); /* FF3.6-15 */
+    background: -webkit-linear-gradient(top,  #f4d160 0%,#28527A 100%); /* Chrome10-25,Safari5.1-6 */
+    background: linear-gradient(to bottom,  #f4d160 0%,#28527A  100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f4d160', endColorstr='#28527A',GradientType=0 ); /* IE6-9 */
+    background-attachment: fixed;
+    font-family: 'Prompt', sans-serif;
 }
+
+
+/****
+Header
+****/
+.header{
+    height: 200px;
+    width: 100%;
+    text-align: center;
+    font-family: 'Amatic SC', cursive;
+}
+
+/****
+Sidebar
+****/
+
+
+/****
+Search
+****/
+
+
+/****
+Cards
+****/
