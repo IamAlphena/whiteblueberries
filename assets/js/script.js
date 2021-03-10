@@ -1,0 +1,1 @@
+var blueberies = document.querySelector
