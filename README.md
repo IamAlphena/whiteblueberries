@@ -11,8 +11,7 @@ As a user, I can save favorite recipes and access them.
 As a user, I can save my most common searches.  
 
 ## Wireframe: 
-![wireframe](https://cdn.discordapp.com/attachments/818902079228739636/819268833322991
-646/Screen_Shot_2021-03-10_at_11.01.39_AM.png)
+![wireframe](https://cdn.discordapp.com/attachments/818902079228739636/819268833322991646/Screen_Shot_2021-03-10_at_11.01.39_AM.png)
 
 ## Userflow diagram:
 User chooses the ingredient they want -->
