@@ -18,8 +18,6 @@ function getMeal(ingredient) {
             var mealImg = item.strMealThumb;
             console.log(mealName);
             console.log(mealImg);
-
-            
         }
         // console.log(idArray);
         // console.log(idArray[0])
