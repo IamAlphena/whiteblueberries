@@ -1,3 +1,8 @@
 #Blueberries{
     background-color: blue;
 }
+.row-of-cards{
+    float: left;
+    background-color: silver;
+
+}
