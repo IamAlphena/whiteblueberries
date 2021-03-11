@@ -89,8 +89,4 @@ function populateRecent(arr) {
 }
 populateRecent(recentStorage);
 getMeal("chicken");
-<<<<<<< HEAD
-var blueberies = document.querySelector
-=======
->>>>>>> ec16f94e4913e634c946b12c22a0c67a07d54f07
 
