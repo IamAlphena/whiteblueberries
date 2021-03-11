@@ -3,7 +3,7 @@ $(document).ready(function() {
     const getData = function() {
         
         //get user input
-        var userInput = $("#search").val().trim().replace(/ /g,"_");
+        var userInput = $("#search").val().trim().replace(/ /,"_");
         
         //get the user data 
         $.ajax({
