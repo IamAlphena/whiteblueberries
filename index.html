@@ -1,19 +1,19 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
+<meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>White Blueberries</title>
     <link link rel="stylesheet" href="./assets/css/style.css"/>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
 </head>
-<body>
+<!-- <body>
     <input id="search"/>
     <button class="search-btn">Search</button>
     <div class="row-of-cards" id="recipe-list">
-        <!-- this is where the cards will render -->
-    </div>
+        this is where the cards will render
+    </div> -->
   <script src="./assets/js/script.js"></script>
     <link rel="preconnect" href="https://fonts.gstatic.com/%22%3E"/>
     <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@200&display=swap" rel="stylesheet">
@@ -27,19 +27,30 @@
     </header>
 
     <div class="navbar">
-    <ul>
+        <div id="recent-container">
+            <h1>Recent Searches</h1>
+            <ul id="recent-list"></ul>
+        </div>
+        <div id="favorites-container">
+            <h1>Favorite Items</h1>
+        </div>
+    <!-- <ul>
          <li><a href="recent">Recent</a></li>
          <li><a href="favorites">Favorites</a></li>
-    </ul>
+    </ul> -->
     </div>  
         
-    <div class="searchbox"></div>
-        <input type="text" placeholder="Search foods and drinks">
-
+    <div class="searchBox"></div>
+        <input type="text" placeholder="Search foods and drinks" id="search-text">
+<!-- 
             <ul>
                 <a href="#food">Food</a>
                 <a href="#cocktail">Cocktail</a>    
-            </ul>
+            </ul> -->
+            <div id="search-btns">
+                <button id="food-btn">Food</button>
+                <button id="drink-btn">Drinks</button>
+            </div>
 
             <button type="button">Instructions</button>
             <button type="button">Instructions</button>
@@ -48,9 +59,9 @@
         
         <script src="./assets/js/script.js"></script>
 
-     
-    </body>
-  </html>
+      <script src="./assets/js/script.js"></script>
+    <!-- </body> -->
+  <!-- </html> -->
    
 </body>
 </html>
