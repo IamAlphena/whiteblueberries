@@ -3,7 +3,7 @@ $(document).ready(function() {
     const getData = function() {
         
         //get user input
-        var userInput = $("#search").val().trim().replace(/ /,"_");
+        var userInput = $("#searchBox").val().trim().replace(/ /,"_");
         
         //get the user data 
         $.ajax({
@@ -35,7 +35,7 @@ $(document).ready(function() {
         });
     } 
     
-    //on click of a button search for the data and redner it
+    //on click of a button search for the data and render it
     $(".search-btn").on("click",getData);
 });
 var blueberies = document.querySelector;
