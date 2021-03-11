@@ -73,20 +73,26 @@ function recentItemsStorage(value) {
   localStorage.setItem("recents", JSON.stringify(recentStorage));
   populateRecent(recentStorage);
 }
+
+// Add ul with li s to #recent-container
+function populateRecent(arr) {
+    recentList.innerHTML = "";
+    for (let i = 0; i < arr.length; i++) {
+        var item = arr[i];
+        var li = document.createElement("li");
+        li.innerText = item;
+        recentList.append(li);
+    }
+}
+
 foodBtn.addEventListener("click", function (e) {
   e.preventDefault();
   recentItemsStorage(searchText.value);
-});
-// Add ul with li s to #recent-container
-function populateRecent(arr) {
-  recentList.innerHTML = "";
-  for (let i = 0; i < arr.length; i++) {
-    var item = arr[i];
-    var li = document.createElement("li");
-    li.innerText = item;
-    recentList.append(li);
-  }
-}
+})
+drinkBtn.addEventListener("click", function (e) {
+    e.preventDefault();
+    recentItemsStorage(searchText.value);
+  })
 populateRecent(recentStorage);
 getMeal("chicken");
 
