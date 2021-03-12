@@ -23,17 +23,24 @@ body{   background: #F4D160; /* Old browsers */
 /****
 Header
 ****/
-.header{
-    height: 200px;
+header{
+    height: 150px;
     width: 100%;
     text-align: center;
     font-family: 'Amatic SC', cursive;
+    background-color: #28527A;
+    font-size: 55px;
+    margin-top: 10px;
+    color: #FBFBF8;
 }
 
 /****
 Sidebar
 ****/
-
+.navbar{
+    width: 200px;
+    border: 1px solid white; 
+}
 
 /****
 Search
