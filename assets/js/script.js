@@ -81,9 +81,12 @@ var recentContainer = document.querySelector("#recent-container");
 var favoritesContainer = document.querySelector("#favorites-container");
 var recentList = document.querySelector("#recent-list");
 var favoritesList = document.querySelector("#favorites-list");
+var savedFood = document.querySelector("#food-items");
+var savedDrinks = document.querySelector("#drink-items");
 // var favoriteBtn = document.querySelector("#favorite-btn");
 // Instantiating localStorage
-var recentStorage = JSON.parse(localStorage.getItem("recents")) || [];
+var foodStorage = JSON.parse(localStorage.getItem("food")) || [];
+var drinkStorage = JSON.parse(localStorage.getItem("drinks")) || [];
 var favoriteStorage = JSON.parse(localStorage.getItem("favorites")) || [];
 
 //fetch request for mealDB
@@ -129,14 +132,23 @@ function getMealbyID (id) {
   })
 }
 
-// Local storage for recent items
-function recentItemsStorage(value) {
-  if (recentStorage.length === 5) {
-    recentStorage.pop();
+// Local storage for recent food items
+function recentFoodStorage(value) {
+  if (foodStorage.length === 5) {
+    foodStorage.pop();
   }
-  recentStorage.unshift(value);
-  localStorage.setItem("recents", JSON.stringify(recentStorage));
-  populateRecent(recentStorage);
+  foodStorage.unshift(value);
+  localStorage.setItem("food", JSON.stringify(foodStorage));
+  populateRecentFood(foodStorage);
+}
+// Local storage for recent drink items
+function recentDrinkStorage(value) {
+  if (drinkStorage.length === 5) {
+    drinkStorage.pop();
+  }
+  drinkStorage.unshift(value);
+  localStorage.setItem("drinks", JSON.stringify(drinkStorage));
+  populateRecentDrink(drinkStorage);
 }
  // local storage for favorite meals
 function favoriteItemsStorage(value) {
@@ -149,13 +161,23 @@ function favoriteItemsStorage(value) {
 }
 
 // Add recemt searches to #recent-container
-function populateRecent(arr) {
-  recentList.innerHTML = "";
+function populateRecentFood(arr) {
+  savedFood.innerHTML = "<h3>Food</h3>";
   for (let i = 0; i < arr.length; i++) {
     var item = arr[i];
     var li = document.createElement("li");
     li.innerText = item;
-    recentList.append(li);
+    savedFood.append(li);
+  }
+}
+// Add recemt searches to #recent-container
+function populateRecentDrink(arr) {
+  savedDrinks.innerHTML = "<h3>Drinks</h3>";
+  for (let i = 0; i < arr.length; i++) {
+    var item = arr[i];
+    var li = document.createElement("li");
+    li.innerText = item;
+    savedDrinks.append(li);
   }
 }
 // Add favorite meals to #favorites-container
@@ -171,14 +193,14 @@ function populateFavorites(arr) {
 // event when the food button is clicked to store the search term to recent searches and get the meals for the searched value
 foodBtn.addEventListener("click", function (e) {
   e.preventDefault();
-  recentItemsStorage(searchText.value);
+  recentFoodStorage(searchText.value);
   getMeal(searchText.value);
 });
 
 // event when the drink button is clicked to store the search term to recent searches and get the drinks for the searched value
 drinkBtn.addEventListener("click", function (e) {
   e.preventDefault();
-  recentItemsStorage(searchText.value);
+  recentDrinkStorage(searchText.value);
   getDrink(searchText.value);
 });
 
@@ -211,7 +233,9 @@ favoritesContainer.addEventListener("click", function (e) {
 
 
 // Initial population of the recent searches and favorite items lists
-populateRecent(recentStorage);
+// populateRecent(recentStorage);
+populateRecentDrink(drinkStorage);
+populateRecentFood(foodStorage);
 populateFavorites(favoriteStorage);
 
 
