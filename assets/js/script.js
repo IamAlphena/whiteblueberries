@@ -162,7 +162,7 @@ function favoriteItemsStorage(value) {
 
 // Add recemt searches to #recent-container
 function populateRecentFood(arr) {
-  savedFood.innerHTML = "";
+  savedFood.innerHTML = "<h3>Food</h3>";
   for (let i = 0; i < arr.length; i++) {
     var item = arr[i];
     var li = document.createElement("li");
@@ -172,7 +172,7 @@ function populateRecentFood(arr) {
 }
 // Add recemt searches to #recent-container
 function populateRecentDrink(arr) {
-  savedDrinks.innerHTML = "";
+  savedDrinks.innerHTML = "<h3>Drinks</h3>";
   for (let i = 0; i < arr.length; i++) {
     var item = arr[i];
     var li = document.createElement("li");
