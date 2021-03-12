@@ -42,9 +42,50 @@ Sidebar
     border: 1px solid white; 
 }
 
+#recent-container{
+    border: 1px solid white; 
+}
+
+#favorites-container{ 
+    border: 1px solid white; 
+}
+
 /****
 Search
 ****/
+.searchBox input{
+    height: 35px;
+    width: 100px;
+}
+
+#food-btn{
+    background-color: #8aC4D0;
+    height: 50px;
+    width: 100px;
+    border: none;
+    font-size: 20px;
+    color: #28527A;
+}
+
+#drink-btn{
+    background-color: #8aC4D0;
+    height: 50px;
+    width: 100px;
+    border: none;
+    font-size: 20px;
+    color: #28527A;
+}
+
+#food-btn:hover{
+    background-color: #F4D160;
+    color: #FBEEAC;
+}
+
+#drink-btn:hover{
+    background-color: #F4D160;
+    color: #FBEEAC;
+}
+
 
 
 /****
