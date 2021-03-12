@@ -15,7 +15,7 @@
 
 //                 // check if meal are available
 //                 var cardMarkup = ""
-//                 if (res.meals) {
+//                 if (res.drinks) {
 //                     //create string html
 //                     for (var i = 0; i < res.meals.length; i++) {
 //                         cardMarkup += `
@@ -72,13 +72,19 @@
 //     //on click of a button search for the data and redner it
 //     $(".search-btn").on("click",getData);
 // });
+
+// Variables to select page items
 var searchText = document.querySelector("#search-text");
 var foodBtn = document.querySelector("#food-btn");
 var drinkBtn = document.querySelector("#drink-btn");
 var recentContainer = document.querySelector("#recent-container");
+var favoritesContainer = document.querySelector("#favorites-container");
 var recentList = document.querySelector("#recent-list");
-// Concise
+var favoritesList = document.querySelector("#favorites-list");
+var favoriteBtn = document.querySelector("#favorite-btn");
+// Instantiating localStorage
 var recentStorage = JSON.parse(localStorage.getItem("recents")) || [];
+var favoriteStorage = JSON.parse(localStorage.getItem("favorites")) || [];
 
 //fetch request for mealDB
 function getMeal(ingredient) {
@@ -99,23 +105,42 @@ function getMeal(ingredient) {
       }
     });
 }
+// fetch request to get specific meals
+function getMealbyID (id) {
+  var mealByIdURL = `https://www.themealdb.com/api/json/v1/1/lookup.php?i=${id}`;
+  fetch(mealByIdURL)
+  .then((data) => data.json())
+  .then(function (data) {
+    console.log(data.meals[0]);
+    var meal = data.meals[0];
+    var recipeName = meal.strMeal;
+    var recipeImg = meal.strMealThumb;
+    var ingredients = [];
+    ingredients.push(meal.strIngredient1, meal.strIngredient2, meal.strIngredient3, meal.strIngredient4, meal.strIngredient5, meal.strIngredient6, meal.strIngredient7, meal.strIngredient8, meal.strIngredient9, meal.strIngredient10, meal.strIngredient11, meal.strIngredient12, meal.strIngredient13, meal.strIngredient14, meal.strIngredient15, meal.strIngredient16, meal.strIngredient17, meal.strIngredient18, meal.strIngredient19, meal.strIngredient20,);
+    var instructions = meal.strInstructions;
+  })
+}
+
 // Local storage for recent items
-// Takes in a value
-// Stores it in local storage
 function recentItemsStorage(value) {
-  // If the array has 5 elements remove the oldest
-  // Add new item to the beginning of the array
   if (recentStorage.length === 5) {
-    // Remove last item
     recentStorage.pop();
   }
-  // Add item to front of array
   recentStorage.unshift(value);
   localStorage.setItem("recents", JSON.stringify(recentStorage));
   populateRecent(recentStorage);
 }
+ // local storage for favorite meals
+function favoriteItemsStorage(value) {
+  if (favoriteStorage === 5) {
+    favoriteStorage.pop();
+  }
+  favoriteStorage.unshift(value);
+  localStorage.setItem("favorites", favoriteStorage);
+  populateFavorites(favoriteStorage);
+}
 
-// Add ul with li s to #recent-container
+// Add recemt searches to #recent-container
 function populateRecent(arr) {
   recentList.innerHTML = "";
   for (let i = 0; i < arr.length; i++) {
@@ -125,17 +150,61 @@ function populateRecent(arr) {
     recentList.append(li);
   }
 }
-
+// Add favorite meals to #favorites-container
+function populateFavorites(arr) {
+  favoritesList.innerHTML = "";
+  for (let i = 0; i < arr.length; i++) {
+    var item = arr[i];
+    var li = document.createElement("li");
+    li.innerText = item;
+    favoritesList.append(li);
+  }
+}
+// event when the food button is clicked to store the search term to recent searches and get the meals for the searched value
 foodBtn.addEventListener("click", function (e) {
   e.preventDefault();
   recentItemsStorage(searchText.value);
+  getMeal(searchText.value);
 });
+
+// event when the drink button is clicked to store the search term to recent searches and get the drinks for the searched value
 drinkBtn.addEventListener("click", function (e) {
   e.preventDefault();
   recentItemsStorage(searchText.value);
+  getDrink(searchText.value);
 });
+
+//event when the favorite button is clicked to save the meal id to localstorage
+favoriteBtn.addEventListener('click', function (e) {
+  e.preventDefault();
+  var element = e.target;
+  var id = element;
+  favoriteItemsStorage(id);
+})
+
+// event to re search for the selected value when an item in the recent searches list is clicked on
+recentContainer.addEventListener("click", function (e) {
+  var element = e.target;
+  var text = element.textContent;
+  if(element.matches("li")) {
+    getMeal(text);
+    getDrink(text);
+  }
+})
+//  event to re search for the selected value when an item in the favorite items list is clicked on
+favoritesContainer.addEventListener("click", function (e) {
+  var element = e.target;
+  var text =  element.textContent;
+  if(element.matches('li')) {
+    getMealbyID(text);
+    getDrinkbyID(text);
+  }
+})
+
+
+// Initial population of the recent searches and favorite items lists
 populateRecent(recentStorage);
-getMeal("chicken");
+populateFavorites(favoriteStorage);
 
 
 
@@ -173,13 +242,12 @@ getMeal("chicken");
 
 
 // fetch for Drink
-function getDrinkID(ingredient) {
+function getDrink(ingredient) {
   // Api url + ingredient
   var drinkByIngredientURL = `https://www.thecocktaildb.com/api/json/v1/1/filter.php?i=${ingredient}`;
   fetch(drinkByIngredientURL)
     // response to json
     .then((data) => data.json())
-    // push the id
     .then(function (data) {
       for (let i = 0; i < data.drinks.length; i++) {
         var item = data.drinks[i];
@@ -191,4 +259,17 @@ function getDrinkID(ingredient) {
     });
 }
 
-getDrinkID("gin");
+function getDrinkbyID (id) {
+  var drinkByIdURL = `https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=${id}`;
+  fetch(drinkByIdURL)
+  .then((data) => data.json())
+  .then(function (data) {
+    // console.log(data.drinks[0]);
+    var meal = data.drinks[0];
+    var recipeName = meal.strDrink;
+    var recipeImg = meal.strDrinkThumb;
+    var ingredients = [];
+    ingredients.push(meal.strIngredient1, meal.strIngredient2, meal.strIngredient3, meal.strIngredient4, meal.strIngredient5, meal.strIngredient6, meal.strIngredient7, meal.strIngredient8, meal.strIngredient9, meal.strIngredient10, meal.strIngredient11, meal.strIngredient12, meal.strIngredient13, meal.strIngredient14, meal.strIngredient15, meal.strIngredient16, meal.strIngredient17, meal.strIngredient18, meal.strIngredient19, meal.strIngredient20,);
+    var instructions = meal.strInstructions;
+  })
+}
