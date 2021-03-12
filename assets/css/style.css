@@ -19,6 +19,14 @@ body{   background: #F4D160; /* Old browsers */
     font-family: 'Prompt', sans-serif;
 }
 
+.main{
+    display: flex; 
+}
+
+.spacer{
+    height: 10px;
+    width: auto;
+}
 
 /****
 Header
@@ -30,7 +38,7 @@ header{
     font-family: 'Amatic SC', cursive;
     background-color: #28527A;
     font-size: 55px;
-    margin-top: 10px;
+    margin-top: -60px;
     color: #FBFBF8;
 }
 
@@ -38,24 +46,36 @@ header{
 Sidebar
 ****/
 .navbar{
-    width: 200px;
+    width: 230px;
     border: 1px solid white; 
+}
+
+.navbar h1{
+    font-size: 25px;
 }
 
 #recent-container{
     border: 1px solid white; 
+    height: 350px;
+
 }
 
 #favorites-container{ 
     border: 1px solid white; 
+    height: auto;
 }
 
 /****
 Search
 ****/
+.searchBox{
+    padding: 40px;
+    margin: 20px;
+}
+
 .searchBox input{
     height: 35px;
-    width: 100px;
+    width: 250px;
 }
 
 #food-btn{
@@ -65,6 +85,8 @@ Search
     border: none;
     font-size: 20px;
     color: #28527A;
+    margin: 10px;
+    border-radius: 5px;
 }
 
 #drink-btn{
@@ -74,6 +96,8 @@ Search
     border: none;
     font-size: 20px;
     color: #28527A;
+    margin: 10px;
+    border-radius: 5px;
 }
 
 #food-btn:hover{
@@ -86,8 +110,25 @@ Search
     color: #FBEEAC;
 }
 
-
-
 /****
 Cards
 ****/
+
+.card-column{
+
+}
+
+.info-card{
+    height: auto;
+    width: 200px;
+    background-color: #FBEEAC;   
+}
+.info-card h2{
+    padding: 2px;
+}
+
+.info-card img{
+    max-height: 100%;
+    width: 150px;
+    margin-left: 25px;
+}
