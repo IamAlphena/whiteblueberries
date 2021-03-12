@@ -81,7 +81,7 @@ var recentContainer = document.querySelector("#recent-container");
 var favoritesContainer = document.querySelector("#favorites-container");
 var recentList = document.querySelector("#recent-list");
 var favoritesList = document.querySelector("#favorites-list");
-var favoriteBtn = document.querySelector("#favorite-btn");
+// var favoriteBtn = document.querySelector("#favorite-btn");
 // Instantiating localStorage
 var recentStorage = JSON.parse(localStorage.getItem("recents")) || [];
 var favoriteStorage = JSON.parse(localStorage.getItem("favorites")) || [];
@@ -103,6 +103,10 @@ function getMeal(ingredient) {
         console.log(recipeName);
         console.log(recipeImg);
       }
+    })
+    .catch(function(e){
+      // add some text to the screen saying there are no results for that ingredient
+      console.log(e);
     });
 }
 // fetch request to get specific meals
@@ -115,9 +119,13 @@ function getMealbyID (id) {
     var meal = data.meals[0];
     var recipeName = meal.strMeal;
     var recipeImg = meal.strMealThumb;
-    var ingredients = [];
-    ingredients.push(meal.strIngredient1, meal.strIngredient2, meal.strIngredient3, meal.strIngredient4, meal.strIngredient5, meal.strIngredient6, meal.strIngredient7, meal.strIngredient8, meal.strIngredient9, meal.strIngredient10, meal.strIngredient11, meal.strIngredient12, meal.strIngredient13, meal.strIngredient14, meal.strIngredient15, meal.strIngredient16, meal.strIngredient17, meal.strIngredient18, meal.strIngredient19, meal.strIngredient20,);
-    var instructions = meal.strInstructions;
+    // var ingredients = [];
+    // ingredients.push(meal.strIngredient1, meal.strIngredient2, meal.strIngredient3, meal.strIngredient4, meal.strIngredient5, meal.strIngredient6, meal.strIngredient7, meal.strIngredient8, meal.strIngredient9, meal.strIngredient10, meal.strIngredient11, meal.strIngredient12, meal.strIngredient13, meal.strIngredient14, meal.strIngredient15, meal.strIngredient16, meal.strIngredient17, meal.strIngredient18, meal.strIngredient19, meal.strIngredient20,);
+    // var instructions = meal.strInstructions;
+  })
+  .catch(function(e) {
+    // add some text to screen saying there is no meal with that id
+    console.log(e)
   })
 }
 
@@ -175,12 +183,12 @@ drinkBtn.addEventListener("click", function (e) {
 });
 
 //event when the favorite button is clicked to save the meal id to localstorage
-favoriteBtn.addEventListener('click', function (e) {
-  e.preventDefault();
-  var element = e.target;
-  var id = element;
-  favoriteItemsStorage(id);
-})
+// favoriteBtn.addEventListener('click', function (e) {
+//   e.preventDefault();
+//   var element = e.target;
+//   var id = element.something.something;
+//   favoriteItemsStorage(id);
+// })
 
 // event to re search for the selected value when an item in the recent searches list is clicked on
 recentContainer.addEventListener("click", function (e) {
@@ -256,6 +264,10 @@ function getDrink(ingredient) {
         console.log(recipeName);
         console.log(recipeImg);
       }
+    })
+    .catch(function(e) {
+      // add some text to screen saying there are no drinks with that ingredient
+      console.log(e)
     });
 }
 
@@ -268,8 +280,12 @@ function getDrinkbyID (id) {
     var meal = data.drinks[0];
     var recipeName = meal.strDrink;
     var recipeImg = meal.strDrinkThumb;
-    var ingredients = [];
-    ingredients.push(meal.strIngredient1, meal.strIngredient2, meal.strIngredient3, meal.strIngredient4, meal.strIngredient5, meal.strIngredient6, meal.strIngredient7, meal.strIngredient8, meal.strIngredient9, meal.strIngredient10, meal.strIngredient11, meal.strIngredient12, meal.strIngredient13, meal.strIngredient14, meal.strIngredient15, meal.strIngredient16, meal.strIngredient17, meal.strIngredient18, meal.strIngredient19, meal.strIngredient20,);
-    var instructions = meal.strInstructions;
+    // var ingredients = [];
+    // ingredients.push(meal.strIngredient1, meal.strIngredient2, meal.strIngredient3, meal.strIngredient4, meal.strIngredient5, meal.strIngredient6, meal.strIngredient7, meal.strIngredient8, meal.strIngredient9, meal.strIngredient10, meal.strIngredient11, meal.strIngredient12, meal.strIngredient13, meal.strIngredient14, meal.strIngredient15, meal.strIngredient16, meal.strIngredient17, meal.strIngredient18, meal.strIngredient19, meal.strIngredient20,);
+    // var instructions = meal.strInstructions;
+  })
+  .catch(function(e) {
+    // add some text to screen saying there is no drink with that id
+    console.log(e)
   })
 }
