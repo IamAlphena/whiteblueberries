@@ -189,6 +189,7 @@ function getDrink(ingredient) {
                         <img src="${data.drinks[i].strDrinkThumb}">
                     </div>
                 </div>
+                <br> 
               `;
             }
           }
