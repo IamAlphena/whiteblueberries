@@ -1,78 +1,3 @@
-// $(document).ready(function() {
-
-//     const getData = function() {
-
-//         //get user input
-//         var userInput = $("#search").val().trim().replace(/ /g,"_");
-
-//         //get the user data
-//         $.ajax({
-//             url: `https://www.themealdb.com/api/json/v1/1/filter.php?i=${userInput}`,
-//             type: "get",
-//             success: function(res) {
-
-//                 // console.log("****",res);
-
-//                 // check if meal are available
-//                 var cardMarkup = ""
-//                 if (res.drinks) {
-//                     //create string html
-//                     for (var i = 0; i < res.meals.length; i++) {
-//                         cardMarkup += `
-//                             <div class="card-column">
-//                                 <div class="info-card">
-//                                     <h2>${res.meals[i].strMeal}</h2>
-//                                     <img src="${res.meals[i].strMealThumb}">
-//                                 </div>
-//                             </div>
-//                         `;
-//                     }
-//                 }
-
-//                 //converts string markup into html and renders it
-//                 $("#recipe-list").html(cardMarkup);
-//             }
-//         });
-//     }
-
-//     //on click of a button search for the data and redner it
-//     $(".search-btn").on("click",getData);
-// });
-
-// $(document).ready(function() {
-//     const getData = function() {
-//         //get user input
-//         var userInput = $("#search").val().trim().replace(/ /g,"_");
-//         //get the user data
-//         $.ajax({
-//             url: `https://www.themealdb.com/api/json/v1/1/filter.php?i=${userInput}`,
-//             type: "get",
-//             success: function(res) {
-//                 // console.log("****",res);
-//                 // check if meal are available
-//                 var cardMarkup = ""
-//                 if (res.meals) {
-//                     //create string html
-//                     for (var i = 0; i < res.meals.length; i++) {
-//                         cardMarkup += `
-//                             <div class="card-column">
-//                                 <div class="info-card">
-//                                     <h2>${res.meals[i].strMeal}</h2>
-//                                     <img src="${res.meals[i].strMealThumb}">
-//                                 </div>
-//                             </div>
-//                         `;
-//                     }
-//                 }
-//                 //converts string markup into html and renders it
-//                 $("#recipe-list").html(cardMarkup);
-//             }
-//         });
-//     }
-//     //on click of a button search for the data and redner it
-//     $(".search-btn").on("click",getData);
-// });
-
 // Variables to select page items
 var searchText = document.querySelector("#search-text");
 var foodBtn = document.querySelector("#food-btn");
@@ -99,13 +24,25 @@ function getMeal(ingredient) {
     // setting the response to json
     .then((data) => data.json())
     .then(function (data) {
-      for (let i = 0; i < data.meals.length; i++) {
-        var item = data.meals[i];
-        var recipeName = item.strMeal;
-        var recipeImg = item.strMealThumb;
-        console.log(recipeName);
-        console.log(recipeImg);
+      var cardMarkup = "";
+      if (data.meals) {
+        //create string html
+        for (var i = 0; i < data.meals.length; i++) {
+          cardMarkup += 
+          `
+            <div class="card-column">
+                <div class="info-card">
+                <i class="far fa-star fav-btn"></i>
+                    <h2>${data.meals[i].strMeal}</h2>
+                    <img src="${data.meals[i].strMealThumb}">
+                </div>
+            </div>
+          `;
+        }
       }
+  
+      //converts string markup into html and renders it
+      $("#recipe-list").html(cardMarkup);
     })
     .catch(function(e){
       // add some text to the screen saying there are no results for that ingredient
@@ -191,26 +128,16 @@ function populateFavorites(arr) {
   }
 }
 // event when the food button is clicked to store the search term to recent searches and get the meals for the searched value
-foodBtn.addEventListener("click", function (e) {
-  e.preventDefault();
-  recentFoodStorage(searchText.value);
+foodBtn.addEventListener("click", function () {
   getMeal(searchText.value);
+  recentFoodStorage(searchText.value);
 });
 
 // event when the drink button is clicked to store the search term to recent searches and get the drinks for the searched value
-drinkBtn.addEventListener("click", function (e) {
-  e.preventDefault();
+drinkBtn.addEventListener("click", function () {
   recentDrinkStorage(searchText.value);
   getDrink(searchText.value);
 });
-
-//event when the favorite button is clicked to save the meal id to localstorage
-// favoriteBtn.addEventListener('click', function (e) {
-//   e.preventDefault();
-//   var element = e.target;
-//   var id = element.something.something;
-//   favoriteItemsStorage(id);
-// })
 
 // event to re search for the selected value when an item in the recent searches list is clicked on
 recentContainer.addEventListener("click", function (e) {
@@ -238,41 +165,6 @@ populateRecentDrink(drinkStorage);
 populateRecentFood(foodStorage);
 populateFavorites(favoriteStorage);
 
-
-
-//get the user data
-// $.ajax({
-//   url: `https://www.thecocktaildb.com/api/json/v1/1/filter.php?=gin`,
-//   type: "get",
-//   success: function (res) {
-//     // console.log("****",res);
-
-//     // check if drinks are available
-//     var cardMarkup = "";
-//     if (res.drinks) {
-//       //create string html
-//       for (var i = 0; i < res.drinks.length; i++) {
-//         cardMarkup += `
-//                             <div class="card-column">
-//                                 <div class="info-card">
-//                                     <h2>${res.drinks[i].strDrink}</h2>
-//                                     <img src="${res.drinks[i].strDrinkThumb}">
-//                                 </div>
-//                             </div>
-//                         `;
-//       }
-//     }
-
-//     //converts string markup into html and renders it
-//     $("#recipe-list").html(cardMarkup);
-//   },
-// });
-
-//on click of a button search for the data and redner it
-//  $(".search-btn").on("click",getData);
-
-
-
 // fetch for Drink
 function getDrink(ingredient) {
   // Api url + ingredient
@@ -281,19 +173,48 @@ function getDrink(ingredient) {
     // response to json
     .then((data) => data.json())
     .then(function (data) {
-      for (let i = 0; i < data.drinks.length; i++) {
-        var item = data.drinks[i];
-        var recipeName = item.strDrink;
-        var recipeImg = item.strDrinkThumb;
-        console.log(recipeName);
-        console.log(recipeImg);
-      }
+
+      console.log("drink data: ",data);
+
+      var cardMarkup = "";
+          if (data.drinks) {
+            //create string html
+            for (var i = 0; i < data.drinks.length; i++) {
+              cardMarkup += 
+              `
+                <div class="card-column">
+                    <div class="info-card">
+                    <i class="far fa-star fav-btn"></i>
+                        <h2>${data.drinks[i].strDrink}</h2>
+                        <img src="${data.drinks[i].strDrinkThumb}">
+                    </div>
+                </div>
+                <br> 
+              `;
+            }
+          }
+      
+          //converts string markup into html and renders it
+          $("#recipe-list").html(cardMarkup);
     })
     .catch(function(e) {
       // add some text to screen saying there are no drinks with that ingredient
       console.log(e)
     });
 }
+
+//event bubble set child deligator
+document.querySelector("#recipe-list").addEventListener("click", function(e) {
+  if (e.target.className.indexOf("fav-btn") > -1) {
+    handleFavStarClick()
+  } 
+});
+
+//handle fav start click
+const handleFavStarClick = () => {
+  console.log("**********fav start clicked")
+  //do stuff here on fav star click *********** code here
+};
 
 function getDrinkbyID (id) {
   var drinkByIdURL = `https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=${id}`;
