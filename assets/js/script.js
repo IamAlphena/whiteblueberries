@@ -32,6 +32,7 @@ function getMeal(ingredient) {
           `
             <div class="card-column">
                 <div class="info-card">
+                <i class="far fa-star fav-btn"></i>
                     <h2>${data.meals[i].strMeal}</h2>
                     <img src="${data.meals[i].strMealThumb}">
                 </div>
@@ -183,6 +184,7 @@ function getDrink(ingredient) {
               `
                 <div class="card-column">
                     <div class="info-card">
+                    <i class="far fa-star fav-btn"></i>
                         <h2>${data.drinks[i].strDrink}</h2>
                         <img src="${data.drinks[i].strDrinkThumb}">
                     </div>
@@ -199,6 +201,19 @@ function getDrink(ingredient) {
       console.log(e)
     });
 }
+
+//event bubble set child deligator
+document.querySelector("#recipe-list").addEventListener("click", function(e) {
+  if (e.target.className.indexOf("fav-btn") > -1) {
+    handleFavStarClick()
+  } 
+});
+
+//handle fav start click
+const handleFavStarClick = () => {
+  console.log("**********fav start clicked")
+  //do stuff here on fav star click *********** code here
+};
 
 function getDrinkbyID (id) {
   var drinkByIdURL = `https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=${id}`;
