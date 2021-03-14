@@ -21,11 +21,12 @@ body{   background: #F4D160; /* Old browsers */
 
 .main{
     display: flex; 
+    margin-left: 275px; 
 }
 
 .spacer{
     height: 10px;
-    width: auto;
+    width: 100%;
 }
 
 /****
@@ -46,8 +47,13 @@ header{
 Sidebar
 ****/
 .navbar{
-    width: 230px;
-    border: 1px solid white; 
+    width: 250px;
+    /* border: 1px solid white; */
+    height: 100%;
+    position: fixed;
+    z-index: 1;
+    left: 5px;
+    overflow-x: hidden;
 }
 
 .navbar h1{
@@ -55,13 +61,13 @@ Sidebar
 }
 
 #recent-container{
-    border: 1px solid white; 
+    /* border: 1px solid white;  */
     height: 350px;
 
 }
 
 #favorites-container{ 
-    border: 1px solid white; 
+    /* border: 1px solid white;  */
     height: auto;
 }
 
@@ -72,6 +78,8 @@ Search
 .searchBox{
     padding: 40px;
     margin: 20px;
+    width: 100%;
+    display: block;
 }
 
 .searchBox input{
