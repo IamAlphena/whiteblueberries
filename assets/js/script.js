@@ -47,6 +47,7 @@ function getMeal(ingredient) {
     })
     .catch(function(e){
       // add some text to the screen saying there are no results for that ingredient
+      $('#recipe-list').html('<h1>There are no meal recipes for that search term<h1>')
       console.log(e);
     });
 }
@@ -76,6 +77,7 @@ function getMealbyName (name) {
   })
   .catch(function(e) {
     // add some text to screen saying there is no meal with that id
+    $('#recipe-list').html('<h1>There are no meal recipes for that search term<h1>')
     console.log(e)
   })
 }
@@ -243,6 +245,7 @@ function getDrink(ingredient) {
     })
     .catch(function(e) {
       // add some text to screen saying there are no drinks with that ingredient
+      $('#recipe-list').html('<h1>There are no drink recipes for that search term<h1>')
       console.log(e)
     });
 }
@@ -280,6 +283,7 @@ function getDrinkbyName (name) {
   })
   .catch(function(e) {
     // add some text to screen saying there is no drink with that id
+    $('#recipe-list').html('<h1>There are no drink recipes for that search term<h1>')
     console.log(e)
   })
 }
