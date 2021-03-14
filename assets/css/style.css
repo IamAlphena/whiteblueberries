@@ -22,6 +22,7 @@ body{   background: #F4D160; /* Old browsers */
 .main{
     display: flex; 
     margin-left: 275px; 
+    flex-direction: column;
 }
 
 .spacer{
@@ -63,9 +64,18 @@ Sidebar
 #recent-container{
     /* border: 1px solid white;  */
     height: 350px;
-
+}
+#recent-container li{
+    /* background-color: #8aC4D0; */
+    width: 150px;
+    border-radius: 5px;
 }
 
+#recent-container li:hover{
+    background-color: #F4D160;
+    width: 150px;
+    border-radius: 5px;
+}
 #favorites-container{ 
     /* border: 1px solid white;  */
     height: auto;
