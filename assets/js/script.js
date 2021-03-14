@@ -24,6 +24,7 @@ function getMeal(ingredient) {
     // setting the response to json
     .then((data) => data.json())
     .then(function (data) {
+      // console.log(data);
       var cardMarkup = "";
       if (data.meals) {
         //create string html
@@ -32,8 +33,8 @@ function getMeal(ingredient) {
           `
             <div class="card-column">
                 <div class="info-card">
-                <i class="far fa-star fav-btn"></i>
-                    <h2>${data.meals[i].strMeal}</h2>
+                <i class="far fa-star fav-btn" id="${data.meals[i].idMeal}" data-type="meal"></i>
+                    <h3>${data.meals[i].strMeal}</h3>
                     <img src="${data.meals[i].strMealThumb}">
                 </div>
             </div>
@@ -50,18 +51,28 @@ function getMeal(ingredient) {
     });
 }
 // fetch request to get specific meals
-function getMealbyID (id) {
-  var mealByIdURL = `https://www.themealdb.com/api/json/v1/1/lookup.php?i=${id}`;
-  fetch(mealByIdURL)
+function getMealbyName (name) {
+  var mealByNameURL = `https://www.themealdb.com/api/json/v1/1/search.php?s=${name}`;
+  fetch(mealByNameURL)
   .then((data) => data.json())
   .then(function (data) {
-    console.log(data.meals[0]);
-    var meal = data.meals[0];
-    var recipeName = meal.strMeal;
-    var recipeImg = meal.strMealThumb;
-    // var ingredients = [];
-    // ingredients.push(meal.strIngredient1, meal.strIngredient2, meal.strIngredient3, meal.strIngredient4, meal.strIngredient5, meal.strIngredient6, meal.strIngredient7, meal.strIngredient8, meal.strIngredient9, meal.strIngredient10, meal.strIngredient11, meal.strIngredient12, meal.strIngredient13, meal.strIngredient14, meal.strIngredient15, meal.strIngredient16, meal.strIngredient17, meal.strIngredient18, meal.strIngredient19, meal.strIngredient20,);
-    // var instructions = meal.strInstructions;
+    console.log(data);
+    var cardMarkup = "";
+      //create string html
+        cardMarkup += 
+        `
+          <div class="info-card">
+            <h3>${data.meals[0].strMeal}</h3>
+              <img src="${data.meals[0].strMealThumb}">
+              <ul>
+                <li><a href="${data.meals[0].strSource}">Link to Recipe</a></li>
+                <li><a href="${data.meals[0].strYoutube}">Recipe Video</a></li>
+              </ul>
+            </div>
+          </div>
+        `;
+    //converts string markup into html and renders it
+    $("#recipe-list").html(cardMarkup);
   })
   .catch(function(e) {
     // add some text to screen saying there is no meal with that id
@@ -89,11 +100,11 @@ function recentDrinkStorage(value) {
 }
  // local storage for favorite meals
 function favoriteItemsStorage(value) {
-  if (favoriteStorage === 5) {
+  if (favoriteStorage.length === 5) {
     favoriteStorage.pop();
   }
   favoriteStorage.unshift(value);
-  localStorage.setItem("favorites", favoriteStorage);
+  localStorage.setItem("favorites", JSON.stringify(favoriteStorage));
   populateFavorites(favoriteStorage);
 }
 
@@ -121,12 +132,13 @@ function populateRecentDrink(arr) {
 function populateFavorites(arr) {
   favoritesList.innerHTML = "";
   for (let i = 0; i < arr.length; i++) {
-    var item = arr[i];
+    var item = arr[i].recipeName;
     var li = document.createElement("li");
     li.innerText = item;
     favoritesList.append(li);
   }
 }
+
 // event when the food button is clicked to store the search term to recent searches and get the meals for the searched value
 foodBtn.addEventListener("click", function () {
   getMeal(searchText.value);
@@ -139,12 +151,19 @@ drinkBtn.addEventListener("click", function () {
   getDrink(searchText.value);
 });
 
-// event to re search for the selected value when an item in the recent searches list is clicked on
-recentContainer.addEventListener("click", function (e) {
+// event to re search for the selected value when an item in the recent searched meal list is clicked on
+savedFood.addEventListener("click", function (e) {
   var element = e.target;
   var text = element.textContent;
   if(element.matches("li")) {
     getMeal(text);
+  }
+})
+// event to re search for the selected value when an item in the recent searched drinks list is clicked on
+savedDrinks.addEventListener("click", function (e) {
+  var element = e.target;
+  var text = element.textContent;
+  if(element.matches("li")) {
     getDrink(text);
   }
 })
@@ -153,10 +172,35 @@ favoritesContainer.addEventListener("click", function (e) {
   var element = e.target;
   var text =  element.textContent;
   if(element.matches('li')) {
-    getMealbyID(text);
-    getDrinkbyID(text);
+    if (favoriteStorage.some(e => e.recipeName === text)) {
+      var item = favoriteStorage.find(e => e.recipeName === text);
+      if  (item.type === 'meal') {
+        getMealbyName(item.recipeName);
+      } else {
+        getDrinkbyName(item.recipeName);
+      }
+    }
   }
 })
+
+//event to set items to the favorites list
+document.querySelector("#recipe-list").addEventListener("click", function(e) {
+  var element = e.target;
+  if (element.matches('i')) {
+    var id = element.id;
+    var type = element.getAttribute('data-type');
+    var h3 = element.parentElement.getElementsByTagName('h3');
+    var recipeName = h3[0].textContent;
+    var storageItem = {
+      recipeName: recipeName,
+      id: id,
+      type: type,
+    };
+    favoriteItemsStorage(storageItem);
+    populateFavorites(favoriteStorage);
+  }
+});
+
 
 
 // Initial population of the recent searches and favorite items lists
@@ -174,7 +218,7 @@ function getDrink(ingredient) {
     .then((data) => data.json())
     .then(function (data) {
 
-      console.log("drink data: ",data);
+      // console.log("drink data: ",data);
 
       var cardMarkup = "";
           if (data.drinks) {
@@ -184,8 +228,8 @@ function getDrink(ingredient) {
               `
                 <div class="card-column">
                     <div class="info-card">
-                    <i class="far fa-star fav-btn"></i>
-                        <h2>${data.drinks[i].strDrink}</h2>
+                    <i class="far fa-star fav-btn" id="${data.drinks[i].idDrink}" data-type="drink"></i>
+                        <h3>${data.drinks[i].strDrink}</h3>
                         <img src="${data.drinks[i].strDrinkThumb}">
                     </div>
                 </div>
@@ -203,31 +247,36 @@ function getDrink(ingredient) {
     });
 }
 
-//event bubble set child deligator
-document.querySelector("#recipe-list").addEventListener("click", function(e) {
-  if (e.target.className.indexOf("fav-btn") > -1) {
-    handleFavStarClick()
-  } 
-});
 
 //handle fav start click
 const handleFavStarClick = () => {
   console.log("**********fav start clicked")
+  console.log(this);
   //do stuff here on fav star click *********** code here
 };
 
-function getDrinkbyID (id) {
-  var drinkByIdURL = `https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=${id}`;
+function getDrinkbyName (name) {
+  var drinkByIdURL = `https://www.thecocktaildb.com/api/json/v1/1/search.php?s=${name}`;
   fetch(drinkByIdURL)
   .then((data) => data.json())
   .then(function (data) {
-    // console.log(data.drinks[0]);
-    var meal = data.drinks[0];
-    var recipeName = meal.strDrink;
-    var recipeImg = meal.strDrinkThumb;
-    // var ingredients = [];
-    // ingredients.push(meal.strIngredient1, meal.strIngredient2, meal.strIngredient3, meal.strIngredient4, meal.strIngredient5, meal.strIngredient6, meal.strIngredient7, meal.strIngredient8, meal.strIngredient9, meal.strIngredient10, meal.strIngredient11, meal.strIngredient12, meal.strIngredient13, meal.strIngredient14, meal.strIngredient15, meal.strIngredient16, meal.strIngredient17, meal.strIngredient18, meal.strIngredient19, meal.strIngredient20,);
-    // var instructions = meal.strInstructions;
+    console.log(data)
+    var cardMarkup = "";
+    //create string html
+      cardMarkup += 
+      `
+        <div class="info-card">
+          <h3>${data.drinks[0].strDrink}</h3>
+            <img src="${data.drinks[0].strDrinkThumb}">
+            <ul>
+            <li><a href="${data.drinks[0].strSource}">Link to Recipe</a></li>
+            <li><a href="${data.drinks[0].strYoutube}">Recipe Video</a></li>
+            </ul>
+          </div>
+        </div>
+      `;
+  //converts string markup into html and renders it
+  $("#recipe-list").html(cardMarkup);
   })
   .catch(function(e) {
     // add some text to screen saying there is no drink with that id
