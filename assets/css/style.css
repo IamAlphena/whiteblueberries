@@ -57,8 +57,14 @@ Sidebar
     overflow-x: hidden;
 }
 
-.navbar h1{
-    font-size: 25px;
+.navbar h2{
+    font-size: 30px;
+    font-weight: bold;
+    text-decoration: underline;
+}
+
+.navbar h3{
+    text-decoration: underline;
 }
 
 #recent-container{
@@ -69,6 +75,9 @@ Sidebar
     /* background-color: #8aC4D0; */
     width: 150px;
     border-radius: 5px;
+    font-size: 20px;
+    font-weight: bold;
+    list-style-type: none;
 }
 
 #recent-container li:hover{
