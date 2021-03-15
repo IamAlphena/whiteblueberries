@@ -21,7 +21,7 @@ body{   background: #F4D160; /* Old browsers */
 
 .main{
     display: flex; 
-    margin-left: 275px; 
+    margin-left: 375px; 
     flex-direction: column;
 }
 
@@ -55,6 +55,8 @@ Sidebar
     z-index: 1;
     left: 5px;
     overflow-x: hidden;
+    background-color: #8aC4D0;
+    border-radius: 15px;
 }
 
 .navbar h2{
@@ -144,12 +146,19 @@ Search
 Cards
 ****/
 
+.row-of-cards{
+    display: flex;
+    flex-wrap: wrap;
+
+}
+
 .info-card{
     height: auto;
     width: 200px;
     background-color: #FBEEAC;
     border-radius: 5px;  
     box-shadow: 0 0 10px 1px; 
+    margin: 20px;
 }
 .info-card h2{
     padding: 2px;
