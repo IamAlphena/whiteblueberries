@@ -21,11 +21,13 @@ body{   background: #F4D160; /* Old browsers */
 
 .main{
     display: flex; 
+    margin-left: 375px; 
+    flex-direction: column;
 }
 
 .spacer{
     height: 10px;
-    width: auto;
+    width: 100%;
 }
 
 /****
@@ -46,22 +48,47 @@ header{
 Sidebar
 ****/
 .navbar{
-    width: 230px;
-    border: 1px solid white; 
+    width: 250px;
+    /* border: 1px solid white; */
+    height: 100%;
+    position: fixed;
+    z-index: 1;
+    left: 5px;
+    overflow-x: hidden;
+    background-color: #8aC4D0;
+    border-radius: 15px;
 }
 
-.navbar h1{
-    font-size: 25px;
+.navbar h2{
+    font-size: 30px;
+    font-weight: bold;
+    text-decoration: underline;
+}
+
+.navbar h3{
+    text-decoration: underline;
 }
 
 #recent-container{
-    border: 1px solid white; 
+    /* border: 1px solid white;  */
     height: 350px;
-
+}
+#recent-container li{
+    /* background-color: #8aC4D0; */
+    width: 150px;
+    border-radius: 5px;
+    font-size: 20px;
+    font-weight: bold;
+    list-style-type: none;
 }
 
+#recent-container li:hover{
+    background-color: #F4D160;
+    width: 150px;
+    border-radius: 5px;
+}
 #favorites-container{ 
-    border: 1px solid white; 
+    /* border: 1px solid white;  */
     height: auto;
 }
 
@@ -72,6 +99,8 @@ Search
 .searchBox{
     padding: 40px;
     margin: 20px;
+    width: 100%;
+    display: block;
 }
 
 .searchBox input{
@@ -117,12 +146,19 @@ Search
 Cards
 ****/
 
+.row-of-cards{
+    display: flex;
+    flex-wrap: wrap;
+
+}
+
 .info-card{
     height: auto;
     width: 200px;
     background-color: #FBEEAC;
     border-radius: 5px;  
     box-shadow: 0 0 10px 1px; 
+    margin: 20px;
 }
 .info-card h2{
     padding: 2px;
