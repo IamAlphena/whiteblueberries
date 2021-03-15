@@ -24,7 +24,7 @@ function getMeal(ingredient) {
     // setting the response to json
     .then((data) => data.json())
     .then(function (data) {
-      // console.log(data);
+      console.log(data);
       var cardMarkup = "";
       if (data.meals) {
         //create string html
@@ -203,6 +203,20 @@ document.querySelector("#recipe-list").addEventListener("click", function(e) {
   }
 });
 
+//event search for item to display just that recipe and its ingredients
+document.querySelector("#recipe-list").addEventListener("click", function(e) {
+  var element = e.target;
+  if ((element.matches('img')) || element.matches('h3')) {
+    var name = element.parentElement.getElementsByTagName('h3')[0].textContent;
+    var type = element.parentElement.getElementsByTagName('i')[0].dataset.type;
+    if(type === 'meal') {
+      getMealbyName(name)
+    }
+    if(type === 'drink') {
+      getDrinkbyName(name);
+    }
+  }
+});
 
 
 // Initial population of the recent searches and favorite items lists
