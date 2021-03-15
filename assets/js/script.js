@@ -66,8 +66,8 @@ function getMealbyName (name) {
             <h3>${data.meals[0].strMeal}</h3>
               <img src="${data.meals[0].strMealThumb}">
               <ul>
-                <li><a href="${data.meals[0].strSource}">Link to Recipe</a></li>
-                <li><a href="${data.meals[0].strYoutube}">Recipe Video</a></li>
+                <li><a href="${data.meals[0].strSource}" target="_blank">Link to Recipe</a></li>
+                <li><a href="${data.meals[0].strYoutube}" target="_blank">Recipe Video</a></li>
               </ul>
             </div>
           </div>
@@ -285,13 +285,12 @@ function getDrinkbyName (name) {
         <div class="info-card">
           <h3>${data.drinks[0].strDrink}</h3>
             <img src="${data.drinks[0].strDrinkThumb}">
-            <ul>
-            <li><a href="${data.drinks[0].strSource}">Link to Recipe</a></li>
-            <li><a href="${data.drinks[0].strYoutube}">Recipe Video</a></li>
-            </ul>
-          </div>
-        </div>
-      `;
+            <p>${data.drinks[0].strInstructions}</p>
+            </div>
+            </div>
+            `;
+            // <li><a href="${data.drinks[0].strSource}">Link to Recipe</a></li>
+            // <li><a href="${data.drinks[0].strYoutube}">Recipe Video</a></li>
   //converts string markup into html and renders it
   $("#recipe-list").html(cardMarkup);
   })
