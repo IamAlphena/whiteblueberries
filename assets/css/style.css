@@ -104,11 +104,13 @@ Search
 #food-btn:hover{
     background-color: #F4D160;
     color: #FBEEAC;
+    box-shadow: 0 0 10px 1px;
 }
 
 #drink-btn:hover{
     background-color: #F4D160;
     color: #FBEEAC;
+    box-shadow: 0 0 10px 1px;
 }
 
 /****
@@ -118,7 +120,9 @@ Cards
 .info-card{
     height: auto;
     width: 200px;
-    background-color: #FBEEAC;   
+    background-color: #FBEEAC;
+    border-radius: 5px;  
+    box-shadow: 0 0 10px 1px; 
 }
 .info-card h2{
     padding: 2px;
@@ -128,4 +132,5 @@ Cards
     max-height: 100%;
     width: 150px;
     margin-left: 25px;
+    border-radius: 5px;
 }
