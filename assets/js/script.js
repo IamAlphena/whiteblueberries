@@ -24,7 +24,7 @@ function getMeal(ingredient) {
     // setting the response to json
     .then((data) => data.json())
     .then(function (data) {
-      // console.log(data);
+      console.log(data);
       var cardMarkup = "";
       if (data.meals) {
         //create string html
@@ -66,8 +66,8 @@ function getMealbyName (name) {
             <h3>${data.meals[0].strMeal}</h3>
               <img src="${data.meals[0].strMealThumb}">
               <ul>
-                <li><a href="${data.meals[0].strSource}">Link to Recipe</a></li>
-                <li><a href="${data.meals[0].strYoutube}">Recipe Video</a></li>
+                <li><a href="${data.meals[0].strSource}" target="_blank">Link to Recipe</a></li>
+                <li><a href="${data.meals[0].strYoutube}" target="_blank">Recipe Video</a></li>
               </ul>
             </div>
           </div>
@@ -203,6 +203,20 @@ document.querySelector("#recipe-list").addEventListener("click", function(e) {
   }
 });
 
+//event search for item to display just that recipe and its ingredients
+document.querySelector("#recipe-list").addEventListener("click", function(e) {
+  var element = e.target;
+  if ((element.matches('img')) || element.matches('h3')) {
+    var name = element.parentElement.getElementsByTagName('h3')[0].textContent;
+    var type = element.parentElement.getElementsByTagName('i')[0].dataset.type;
+    if(type === 'meal') {
+      getMealbyName(name)
+    }
+    if(type === 'drink') {
+      getDrinkbyName(name);
+    }
+  }
+});
 
 
 // Initial population of the recent searches and favorite items lists
@@ -271,13 +285,12 @@ function getDrinkbyName (name) {
         <div class="info-card">
           <h3>${data.drinks[0].strDrink}</h3>
             <img src="${data.drinks[0].strDrinkThumb}">
-            <ul>
-            <li><a href="${data.drinks[0].strSource}">Link to Recipe</a></li>
-            <li><a href="${data.drinks[0].strYoutube}">Recipe Video</a></li>
-            </ul>
-          </div>
-        </div>
-      `;
+            <p>${data.drinks[0].strInstructions}</p>
+            </div>
+            </div>
+            `;
+            // <li><a href="${data.drinks[0].strSource}">Link to Recipe</a></li>
+            // <li><a href="${data.drinks[0].strYoutube}">Recipe Video</a></li>
   //converts string markup into html and renders it
   $("#recipe-list").html(cardMarkup);
   })
