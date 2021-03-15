@@ -55,8 +55,9 @@ Sidebar
     z-index: 1;
     left: 5px;
     overflow-x: hidden;
-    background-color: #8aC4D0;
+    background-color: #F4D160;
     border-radius: 15px;
+    padding: 10px;
 }
 
 .navbar h2{
@@ -83,7 +84,7 @@ Sidebar
 }
 
 #recent-container li:hover{
-    background-color: #F4D160;
+    background-color: #8aC4D0;
     width: 150px;
     border-radius: 5px;
 }
@@ -111,7 +112,7 @@ Search
 #food-btn{
     background-color: #8aC4D0;
     height: 50px;
-    width: 100px;
+    width: 120px;
     border: none;
     font-size: 20px;
     color: #28527A;
@@ -122,7 +123,7 @@ Search
 #drink-btn{
     background-color: #8aC4D0;
     height: 50px;
-    width: 100px;
+    width: 120px;
     border: none;
     font-size: 20px;
     color: #28527A;
@@ -160,6 +161,11 @@ Cards
     box-shadow: 0 0 10px 1px; 
     margin: 20px;
 }
+
+.info-card:hover{
+    opacity: 0.5;
+}
+
 .info-card h2{
     padding: 2px;
 }
